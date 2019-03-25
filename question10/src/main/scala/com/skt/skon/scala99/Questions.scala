@@ -39,8 +39,26 @@ object Questions {
     //println(a7)
 
     // Q8: Eliminate consecutive duplicates of list elements.
-    val a8 = Lists.q8.aggregate(List[Symbol]())((acc, x) =>  if (acc.last == x) acc else acc :+ x, (a, b) => a ++ b)
+    val a8 = Lists.q8.aggregate(List[Symbol]())((acc, x) =>  if (acc == Nil || acc.last != x) acc :+ x else acc, _ ++ _)
     //val a8 = Lists.q8.distinct
-    println(a8)
+    //println(a8)
+
+    // Q9: Pack consecutive duplicates of list elements into sublists.
+    val a9 = Lists.q8.aggregate(List[List[Symbol]]())((acc, x) => {
+      if (acc == Nil) List(List(x))
+      else if (acc.last.last == x)
+        acc.dropRight(1) :+ (acc.last :+ x)
+      else acc :+ List(x)
+    }, _ ++ _)
+    //println(a9)
+
+    // Q10: Run-length encoding of a list.
+    val a10 = Lists.q8.aggregate(List[(Int, Symbol)]())((acc, x) => {
+      if (acc == Nil) List((1, x))
+      else if (acc.last._2 == x)
+        acc.dropRight(1) :+ (acc.last._1 + 1, acc.last._2)
+      else acc :+ (1, x)
+    }, _ ++ _)
+    println(a10)
   }
 }

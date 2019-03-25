@@ -10,7 +10,7 @@ apply plugin: 'idea'
 subprojects {
     apply plugin: 'scala'
 
-    group = 'com.skt.skon'
+    group = 'com.skt'
     version = '0.1'
     sourceCompatibility = 1.8
 
