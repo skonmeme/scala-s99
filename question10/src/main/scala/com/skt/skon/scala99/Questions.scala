@@ -1,50 +1,56 @@
 package com.skt.skon.scala99
 
 import com.skt.skon.scala99.datasets.Lists
+import com.skt.skon.scala99.implicits.ListExtention
 import com.skt.skon.scala99.utils.{WithOption, WithTag}
 
 object Questions {
+
+  implicit def listToListExtention[T](list: List[T]): ListExtention[T] = new ListExtention(list)
+
   def main(args: Array[String]): Unit = {
-    // Q1: Find the last element of a list.
-    val a1 = Lists.q1.last
+    // P1: Find the last element of a list.
+    val a1 = Lists.p1.last
     // List.q1.head
     // List.q1.tail
     //println(a1)
 
-    // Q2: Find the last but one element of a list.
-    val a2 = Lists.q1.reverse.apply(1)
+    // P2: Find the last but one element of a list.
+    val a2 = Lists.p1.reverse.apply(1)
     // Lists.q1.reverse.iterator
     //println(a2)
 
-    // Q3: Find the Kth element of a list.
+    // P3: Find the Kth element of a list.
     val k = 3
-    val a3 = WithOption.listApply(Lists.q1, k)
+    //val a3 = WithOption.listApply(Lists.p1, k)
+    val a3 = Lists.p1.applyWithOption(k)
     //a3 match {
     //  case None => println("Out of range")
     //  case _ => println(a3)
     //}
+    //println(a3)
 
-    // Q4: Find the number of elements of a list.
-    val a4 = Lists.q1.length
+    // P4: Find the number of elements of a list.
+    val a4 = Lists.p1.length
 
-    // Q5: Reverse a list.
-    val a5 = Lists.q1.reverse
+    // P5: Reverse a list.
+    val a5 = Lists.p1.reverse
 
-    // Q6: Find out whether a list is a palindrome.
-    val a6 = (Lists.q6 == Lists.q6.reverse)
+    // P6: Find out whether a list is a palindrome.
+    val a6 = (Lists.p6 == Lists.p6.reverse)
     //println(a6)
 
-    // Q7: Flatten a nested list structure.
-    val a7 = WithTag.flatMap[Any](Lists.q7)
+    // P7: Flatten a nested list structure.
+    val a7 = WithTag.flatMap[Any](Lists.p7)
     //println(a7)
 
-    // Q8: Eliminate consecutive duplicates of list elements.
-    val a8 = Lists.q8.aggregate(List[Symbol]())((acc, x) =>  if (acc == Nil || acc.last != x) acc :+ x else acc, _ ++ _)
+    // P8: Eliminate consecutive duplicates of list elements.
+    val a8 = Lists.p8.aggregate(List[Symbol]())((acc, x) =>  if (acc == Nil || acc.last != x) acc :+ x else acc, _ ++ _)
     //val a8 = Lists.q8.distinct
     //println(a8)
 
-    // Q9: Pack consecutive duplicates of list elements into sublists.
-    val a9 = Lists.q8.aggregate(List[List[Symbol]]())((acc, x) => {
+    // P9: Pack consecutive duplicates of list elements into sublists.
+    val a9 = Lists.p8.aggregate(List[List[Symbol]]())((acc, x) => {
       if (acc == Nil) List(List(x))
       else if (acc.last.last == x)
         acc.dropRight(1) :+ (acc.last :+ x)
@@ -52,13 +58,43 @@ object Questions {
     }, _ ++ _)
     //println(a9)
 
-    // Q10: Run-length encoding of a list.
-    val a10 = Lists.q8.aggregate(List[(Int, Symbol)]())((acc, x) => {
+    // P10: Run-length encoding of a list.
+    val a10 = Lists.p8.aggregate(List[(Int, Symbol)]())((acc, x) => {
       if (acc == Nil) List((1, x))
       else if (acc.last._2 == x)
         acc.dropRight(1) :+ (acc.last._1 + 1, acc.last._2)
       else acc :+ (1, x)
     }, _ ++ _)
-    println(a10)
+    //println(a10)
+
+    // P11: Modified run-length encoding
+    val a11 = a10.map {
+      case (1, x: Symbol) => x
+      case x => x
+    }
+    //println(a11)
+
+    // P12: Decode a run-length encoded list.
+    val a12 = a10.flatMap {
+      case (n: Int, x) => List.fill(n)(x)
+    }
+    //println(a12)
+
+    // P13: Run-length encoding of a list (direct solution).
+    val a13 = Lists.p8.foldRight(List[(Int, Symbol)]())((x, acc) => {
+      if (acc == Nil) List((1, x))
+      else if (acc.head._2 == x) (acc.head._1 + 1, x) +: acc.drop(1)
+      else (1, x) +: acc
+    })
+    //println(a13)
+
+    // P14: Duplicate the elements of a list.
+    val a14 = Lists.p14.flatMap(List.fill(2)(_))
+    //println(a14)
+
+    // P15: Duplicate the elements of a list a given number of times.
+    val a15 = Lists.p14.duplicate(k)
+    //val a15 = WithOption.duplicate(Lists.p14, k)
+    //println(a15)
   }
 }
