@@ -1,5 +1,7 @@
 package com.skt.skon.scala99.utils
 
+import sun.tools.tree.LongExpression
+
 class LongExtention(x: Long) {
 
   def prime: Boolean = {
@@ -13,7 +15,11 @@ class LongExtention(x: Long) {
   def divider: List[Long] = {
     x match {
       case _ if x <= 1 => List(1)
-      case _ => (1L to x / 2 + 1).filter(x % _ == 0).toList
+      case _ => {
+        val d = if (x / 2 + 1 == x) (1L to x / 2 + 1).toList
+        else (1L to x / 2 + 1).toList :+ x
+        d.filter(x % _ == 0)
+      }
     }
   }
 
@@ -37,7 +43,30 @@ class LongExtention(x: Long) {
   }
 
   def totient: Long = {
-    (x - 1 to 2L by -1).count(gcd(_).contains(1))
+    (x - 1 to 1L by -1).count(gcd(_).contains(1))
+  }
+
+  def factorize: Map[Long, Int] = {
+    dividers.groupBy(_.toLong).map(z => (z._1, z._2.length))
+  }
+
+  def pow(k: Int): Long = {
+    k match {
+      case _ if k < 0 => 0L
+      case _ if k <= 0 => 1L
+      case _ => List.fill(k)(x).product
+    }
+  }
+
+  def etotient: Long = {
+    factorize.map(z => new LongExtention(z._1).pow(z._2 - 1) * (z._1 - 1)).product
+  }
+
+  def goldbach: Option[List[(Long, Long)]] = {
+    if (x < 4 || x % 2 == 0) {
+      val p = (1L to x).filter(new LongExtention(_).prime)
+      Some(p.filter(z => p.filter(y => y >= z).contains(x - z)).map(z => (z, x - z)).toList)
+    } else None
   }
 
 }
