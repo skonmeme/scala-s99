@@ -13,4 +13,6 @@ object Lists {
   val p27 = List('a, 'b, 'c, 'd, 'e, 'f, 'g)
   val p28 = List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o))
 
+  val p50 = List(("a", 45), ("b", 13), ("c", 12), ("d", 16), ("e", 9), ("f", 5))
+
 }

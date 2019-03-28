@@ -1,6 +1,4 @@
-package com.skt.skon.scala99.utils
-
-import sun.tools.tree.LongExpression
+package com.skt.skon.scala99.implicits
 
 class LongExtention(x: Long) {
 
