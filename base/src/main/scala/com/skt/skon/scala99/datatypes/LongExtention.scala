@@ -1,4 +1,4 @@
-package com.skt.skon.scala99.implicits
+package com.skt.skon.scala99.datatypes
 
 class LongExtention(x: Long) {
 

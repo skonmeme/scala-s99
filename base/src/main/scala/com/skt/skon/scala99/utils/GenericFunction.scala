@@ -1,5 +1,7 @@
 package com.skt.skon.scala99.utils
 
+import com.skt.skon.scala99.datatypes.{HuffmanBranch, HuffmanLeaf}
+
 object GenericFunction {
 
   def listApply[T](list: List[T], k: Int): Option[T] = {
@@ -28,26 +30,27 @@ object GenericFunction {
     p.map(z => z.mkString(""))
   }
 
-  def huffman(list: List[(String, Int)]): List[(String, Int)] = {
-    sealed trait Tree[+A]
-    case class Branch[A](var left: Tree[A], var right: Tree[A], var value: Int) extends Tree[A]
-    case class Leaf[A](value: (String, Int)) extends Tree[A]
-
+  def huffman(list: List[(String, Int)]): List[(String, String)] = {
     list.length match {
       case 0 => Nil
       case 1 => List((list.head._1, "0"))
       case _ => {
-        val l = list.sortBy(_._2).iterator
-        var b = Branch(Leaf(list.head), Leaf(list.apply(1)), list.head._2 + list.apply(1)._2)
-        l.drop(2).foreach(e => {
-          if (b.value <= e._2) {
-            b = Branch(b, Leaf(e), b.value + e._2)
-          } else {
-            b = Branch(Leaf(e), b, b.value + e._2)
-          }
-        })
-        b.
-      }
+        val l = list.sortBy(_._2).map(x => HuffmanLeaf(x._1, x._2)).iterator
+        val h = l.next
+        val t = l.next
+        var b = HuffmanBranch(h, t, h.count + t.count)
 
+        var buffer: Option[HuffmanLeaf[String]] = None
+        while (l.hasNext) {
+          if (buffer.isEmpty) buffer = Some(l.next)
+          else {
+            b = b.add(buffer.get, l.next)
+            buffer = None
+          }
+        }
+        if (buffer.isDefined) b = b.add(buffer.get)
+        b.code
+      }
+    }
   }
 }

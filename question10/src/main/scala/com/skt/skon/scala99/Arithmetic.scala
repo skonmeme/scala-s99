@@ -1,6 +1,6 @@
 package com.skt.skon.scala99
 
-import com.skt.skon.scala99.implicits.LongExtention
+import com.skt.skon.scala99.datatypes.LongExtention
 
 object Arithmetic {
 

@@ -1,4 +1,4 @@
-package com.skt.skon.scala99.implicits
+package com.skt.skon.scala99.datatypes
 
 class ListExtention[T](list: List[T]) {
 

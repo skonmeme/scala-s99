@@ -1,7 +1,7 @@
 package com.skt.skon.scala99
 
 import com.skt.skon.scala99.datasets.Lists
-import com.skt.skon.scala99.implicits.ListExtention
+import com.skt.skon.scala99.datatypes.ListExtention
 import com.skt.skon.scala99.utils.{GenericFunction, WithTag}
 
 import scala.util.Random

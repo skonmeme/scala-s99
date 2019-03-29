@@ -1,6 +1,6 @@
 package com.skt.skon.scala99.datasets
 
-import com.skt.skon.scala99.implicits.ListExtention
+import com.skt.skon.scala99.datatypes.ListExtention
 
 object Lists {
 
