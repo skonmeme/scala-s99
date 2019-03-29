@@ -5,6 +5,8 @@ object Questions {
   def main(args: Array[String]): Unit = {
     Arrays.problem
     Arithmetic.problem
-    Logic.problem
+    Logics.problem
+    BinaryTrees.problem
   }
+
 }

@@ -4,7 +4,7 @@ import com.skt.skon.scala99.datasets.Lists
 import com.skt.skon.scala99.datatypes.BooleanExtention
 import com.skt.skon.scala99.utils.GenericFunction
 
-object Logic {
+object Logics {
 
   implicit def booleanToBooleanExtention(x: Boolean): BooleanExtention = new BooleanExtention(x)
 
