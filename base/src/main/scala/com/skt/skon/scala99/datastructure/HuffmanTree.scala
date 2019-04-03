@@ -1,4 +1,4 @@
-package com.skt.skon.scala99.datatypes
+package com.skt.skon.scala99.datastructure
 
 sealed trait HuffmanTree[+T] {
   def code: List[(T, String)]

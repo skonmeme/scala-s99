@@ -1,5 +1,7 @@
 package com.skt.skon.scala99.datatypes
 
+import com.skt.skon.scala99.datastructure.BinarySearchTree
+
 class ListExtention[T](list: List[T]) {
 
   def applyWithOption(k: Int): Option[T] = {
@@ -54,6 +56,12 @@ class ListExtention[T](list: List[T]) {
       newList
     })
     ecomb.toList.distinct
+  }
+
+  def toBinarySearchTree(implicit order: Ordering[T]): BinarySearchTree[T] = {
+    val tree = BinarySearchTree.of[T]
+    list.foreach(tree.add(_))
+    tree
   }
 
 }

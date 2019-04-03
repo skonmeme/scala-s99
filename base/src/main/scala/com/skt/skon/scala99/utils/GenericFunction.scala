@@ -1,6 +1,6 @@
 package com.skt.skon.scala99.utils
 
-import com.skt.skon.scala99.datatypes.{HuffmanBranch, HuffmanLeaf}
+import com.skt.skon.scala99.datastructure.{HuffmanBranch, HuffmanLeaf}
 
 object GenericFunction {
 
