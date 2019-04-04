@@ -23,6 +23,9 @@ object BinaryTrees {
     println("P57 : " + a57)
     val a57_1 = Lists.p57.toBinarySearchTree
     println("P57-1 : " + a57_1.isSymmetric)
+    val a57_2 = Lists.p57_1.toBinarySearchTree
+    println("P57-2 : " + a57_2.isSymmetric)
+    println("P57-3 : " + a57_1.reverse)
   }
 
   def main(args: Array[String]): Unit = {
