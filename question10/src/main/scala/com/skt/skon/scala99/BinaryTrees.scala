@@ -4,6 +4,8 @@ import com.skt.skon.scala99.datasets.Lists
 import com.skt.skon.scala99.datastructure.{BinarySearchTree, BinaryTree}
 import com.skt.skon.scala99.datatypes.ListExtention
 
+import scala.collection.immutable.RedBlackTree
+
 object BinaryTrees {
 
   implicit def listToListExtention[T](list: List[T]): ListExtention[T] = new ListExtention(list)
@@ -26,6 +28,16 @@ object BinaryTrees {
     val a57_2 = Lists.p57_1.toBinarySearchTree
     println("P57-2 : " + a57_2.isSymmetric)
     println("P57-3 : " + a57_1.reverse)
+
+    // P58: Generate-and-test paradigm.
+    // P59-60: skip
+    // P61
+    val a61 = a57_1.leaves
+    println("P61 : " + a61.size)
+
+    // P62-66 presentation?
+    // P67-69: maybe parsing?
+    // skip
   }
 
   def main(args: Array[String]): Unit = {

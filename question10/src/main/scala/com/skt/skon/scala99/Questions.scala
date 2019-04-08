@@ -7,6 +7,7 @@ object Questions {
     Arithmetic.problem
     Logics.problem
     BinaryTrees.problem
+    Generic.problem
   }
 
 }

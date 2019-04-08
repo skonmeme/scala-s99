@@ -1,5 +1,7 @@
 package com.skt.skon.scala99.datastructure
 
+import scala.annotation.tailrec
+
 class BinarySearchTree[T](implicit order: Ordering[T]) {
 
   private var tree = Map[T, (Option[T], Option[T])]()
@@ -8,6 +10,8 @@ class BinarySearchTree[T](implicit order: Ordering[T]) {
   private def head: (T, (Option[T], Option[T])) = (headValue, tree.apply(headValue))
   private def node(root: T): (T, (Option[T], Option[T])) = (root, tree.apply(root))
 
+  // @tailrec: no more code of guarantee to improve the performance on recursive calling
+  @tailrec
   private def addToTree(n: (T, (Option[T], Option[T])), value: T): Unit = {
     val root  = n._1
     val left  = n._2._1
@@ -42,6 +46,7 @@ class BinarySearchTree[T](implicit order: Ordering[T]) {
     t.add(value)
   }
 
+  // cannot use @tailrec
   private def nodeToList(n: (T, (Option[T], Option[T]))): List[T] = {
     n match {
       case (root, (Some(left), Some(right))) => nodeToList(node(left)) ::: List(root) ::: nodeToList(node(right))
@@ -51,6 +56,7 @@ class BinarySearchTree[T](implicit order: Ordering[T]) {
     }
   }
 
+  // cannot use @tailrec
   def nodeEquivalent(t: BinarySearchTree[T])(n1: (T, (Option[T], Option[T])), n2: (T, (Option[T], Option[T]))): Boolean = {
     val left  = {
       if (n1._2._1.isDefined && n2._2._1.isDefined) nodeEquivalent(t)(node(n1._2._1.get), t.node(n2._2._1.get))
@@ -77,6 +83,8 @@ class BinarySearchTree[T](implicit order: Ordering[T]) {
     val r = reverse
     isEquivalent(r)
   }
+
+  def leaves: List[T] = tree.flatMap(x => if (x._2 == (None, None)) Some(x._1) else None).toList
 
   def toList: List[T] = nodeToList(head)
 
