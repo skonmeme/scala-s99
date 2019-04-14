@@ -15,7 +15,7 @@ object Arithmetic {
   def problem: Unit = {
     // P31: Determine whether a given integer number is prime.
     val t31: Long = 7L
-    val a31 = t31.prime
+    val a31 = t31.isPrime
     println("P31: " + a31)
 
     // P32: Determine the greatest common divisor of two positive integer numbers.
@@ -65,7 +65,7 @@ object Arithmetic {
 
     // P39: A list of prime numbers.
     val t39 = (7L, 31L)
-    val a39 = (t39._1 to t39._2).filter(_.prime).toList
+    val a39 = (t39._1 to t39._2).filter(_.isPrime).toList
     println("P39: " + a39)
 
     // P40: Goldbach's conjecture.

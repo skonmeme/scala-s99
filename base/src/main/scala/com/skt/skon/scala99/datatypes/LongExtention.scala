@@ -2,7 +2,7 @@ package com.skt.skon.scala99.datatypes
 
 class LongExtention(x: Long) {
 
-  def prime: Boolean = {
+  def isPrime: Boolean = {
     x match {
       case _ if x <= 1 => false
       case 2 => true
@@ -62,7 +62,7 @@ class LongExtention(x: Long) {
 
   def goldbach: Option[List[(Long, Long)]] = {
     if (x < 4 || x % 2 == 0) {
-      val p = (1L to x).filter(new LongExtention(_).prime)
+      val p = (1L to x).filter(new LongExtention(_).isPrime)
       Some(p.filter(z => p.filter(y => y >= z).contains(x - z)).map(z => (z, x - z)).toList)
     } else None
   }
